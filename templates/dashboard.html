@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('loan_request') }}">Loan Request</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Dashboard</h1>
+      <h2>Your Loan Requests</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Loan Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for request in requests %}
+          <tr>
+            <td>{{ request.ID }}</td>
+            <td>{{ request.LOAN }}</td>
+            <td>{{ request.status }}</td>
+            <td>
+              {% if request.status == 'pending' %}
+              <form
+                action="{{ url_for('approve', request_id=request.ID) }}"
+                method="POST"
+              >
+                <button type="submit">Approve</button>
+              </form>
+              <form
+                action="{{ url_for('reject', request_id=request.ID) }}"
+                method="POST"
+              >
+                <button type="submit">Reject</button>
+              </form>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

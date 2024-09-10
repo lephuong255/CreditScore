@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+
+    <!----===== Iconscout CSS ===== -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+    <title>FICO Score</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo-name">
+        <div class="logo-image">
+          <img src="../static/images/logo.png" alt="ScoreFin Logo" />
+        </div>
+        <span class="logo_name">
+          <span class="score">FICO</span><span class="fin">Score</span>
+        </span>
+      </div>
+      <div class="menu-items">
+        <ul class="nav-links">
+          <li>
+            <a href="{{url_for('home')}}"
+              ><i class="uil uil-estate"></i
+              ><span class="link-name">Home</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-apps"></i
+              ><span class="link-name">Dashboard</span></a
+            >
+          </li>
+          <li>
+            <a href="{{url_for('credit')}}"
+              ><i class="uil uil-credit-card"></i
+              ><span class="link-name">Credit Score</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-files-landscapes"></i
+              ><span class="link-name">Content</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-chart"></i
+              ><span class="link-name">Analytics</span></a
+            >
+          </li>
+          <li>
+            <a href="{{url_for('about')}}"
+              ><i class="uil uil-info-circle"></i
+              ><span class="link-name">About</span></a
+            >
+          </li>
+          <li>
+            <a href="{{url_for('contact')}}"
+              ><i class="uil uil-envelope"></i
+              ><span class="link-name">Contact</span></a
+            >
+          </li>
+        </ul>
+
+        <ul class="logout-mode">
+          <li>
+            <a href="{{url_for('home')}}"
+              ><i class="uil uil-signout"></i
+              ><span class="link-name">Logout</span></a
+            >
+          </li>
+          <li class="mode">
+            <a href="#"
+              ><i class="uil uil-moon"></i
+              ><span class="link-name">Dark Mode</span></a
+            >
+            <div class="mode-toggle"><span class="switch"></span></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="dashboard">
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+        <div class="search-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Search here..." />
+        </div>
+        <img src="../static/images/profile.png" alt="Profile Image" />
+      </div>
+      <div class="dash-content">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-user-circle"></i>
+            <span class="text">Nhanvien</span>
+          </div>
+        </div>
+
+        <section>
+          <div class="container1">
+            {% for request in requests %}
+            <div class="card-header1">Loan Request {{ request.id }}</div>
+            <fieldset class="custom-fieldset">
+              <legend class="custom-legend">Loan Details</legend>
+              <div class="info-container">
+                <div class="info-section">
+                  <p><strong>Loan:</strong> {{ request.LOAN }}</p>
+                  <p><strong>Mortdue:</strong> {{ request.MORTDUE }}</p>
+                </div>
+                <div class="info-section">
+                  <p><strong>Value:</strong> {{ request.VALUE }}</p>
+                  <p><strong>Debtinc:</strong> {{ request.DEBTINC }}</p>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+              <legend class="custom-legend">Person Details</legend>
+              <div class="info-container">
+                <div class="info-section">
+                  <p><strong>Reason:</strong> {{ request.REASON }}</p>
+                </div>
+                <div class="info-section">
+                  <p><strong>Job:</strong> {{ request.JOB }}</p>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+              <legend class="custom-legend">Customer History</legend>
+              <div class="info-container">
+                <div class="info-section">
+                  <p><strong>YOJ:</strong> {{ request.YOJ }}</p>
+                  <p><strong>Derog:</strong> {{ request.DEROG }}</p>
+                  <p><strong>Delinq:</strong> {{ request.DELINQ }}</p>
+                </div>
+                <div class="info-section">
+                  <p><strong>Clage:</strong> {{ request.CLAGE }}</p>
+                  <p><strong>Ninq:</strong> {{ request.NINQ }}</p>
+                  <p><strong>Clno:</strong> {{ request.CLNO }}</p>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+              <legend class="custom-legend">Customer Information</legend>
+              <div class="info-container">
+                <div class="info-section">
+                  <p><strong>CCCD:</strong> {{ request.user.cccd }}</p>
+                  <p><strong>Name:</strong> {{ request.user.name }}</p>
+                  <p><strong>Phone:</strong> {{ request.user.phone }}</p>
+                  <p><strong>Address:</strong> {{ request.user.address }}</p>
+                </div>
+                <div class="info-section">
+                  <p><strong>Status:</strong> {{ request.status }}</p>
+                  <p>
+                    <strong>Approval Date:</strong> {{ request.approval_date }}
+                  </p>
+                  <p><strong>Score:</strong> {{ request.score }}</p>
+                  <p><strong>Risk:</strong> {{ request.risk }}</p>
+                </div>
+              </div>
+            </fieldset>
+            <div class="card-actions">
+              <form
+                action="{{ url_for('approve_request', cccd=request.user.cccd) }}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit" class="box__button">Approve</button>
+              </form>
+              <form
+                action="{{ url_for('reject_request', cccd=request.user.cccd) }}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit" class="box__button">Reject</button>
+              </form>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+
+      <!-- End of Main Content -->
+      <!-- Start of Footer -->
+      <footer class="footer mt-5">
+        <div class="container1">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-left">
+              <p class="mb-0">&copy; 2024 FICO Score. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <a href="#" class="mr-3">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+    </section>
+
+    <script src="../static/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

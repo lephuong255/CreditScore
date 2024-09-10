@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+    <title>FICO Score - Add Employee</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo-name">
+        <div class="logo-image">
+          <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="Logo"
+          />
+        </div>
+        <span class="logo_name">
+          <span class="score">FICO</span><span class="fin">Score</span>
+        </span>
+      </div>
+      <div class="menu-items">
+        <ul class="nav-links">
+          <li>
+            <a href="{{ url_for('home') }}"
+              ><i class="uil uil-estate"></i
+              ><span class="link-name">Home</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-apps"></i
+              ><span class="link-name">Dashboard</span></a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('credit') }}"
+              ><i class="uil uil-credit-card"></i
+              ><span class="link-name">Credit Score</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-files-landscapes"></i
+              ><span class="link-name">Content</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-chart"></i
+              ><span class="link-name">Analytics</span></a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('about') }}"
+              ><i class="uil uil-info-circle"></i
+              ><span class="link-name">About</span></a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('contact') }}"
+              ><i class="uil uil-envelope"></i
+              ><span class="link-name">Contact</span></a
+            >
+          </li>
+        </ul>
+        <ul class="logout-mode">
+          <li>
+            <a href="#"
+              ><i class="uil uil-signout"></i
+              ><span class="link-name">Logout</span></a
+            >
+          </li>
+          <li class="mode">
+            <a href="#"
+              ><i class="uil uil-moon"></i
+              ><span class="link-name">Dark Mode</span></a
+            >
+            <div class="mode-toggle"><span class="switch"></span></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="dashboard">
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+        <div class="search-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Search here..." />
+        </div>
+        <img
+          src="{{ url_for('static', filename='images/profile.png') }}"
+          alt="Profile"
+        />
+      </div>
+
+      <div class="dash-content">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-sign-in-alt"></i>
+            <span class="text">Add Employee</span>
+          </div>
+        </div>
+
+        <section>
+          <div class="container1">
+            <h1>Add New Employee</h1>
+            <form action="{{ url_for('admin_add_employee') }}" method="post">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required /><br />
+              <label for="cccd">CCCD:</label>
+              <input type="text" id="cccd" name="cccd" required /><br />
+              <label for="password">Password:</label>
+              <input type="text" id="password" name="password" required /><br />
+              <label for="phone">Phone:</label>
+              <input type="text" id="phone" name="phone" /><br />
+              <label for="address">Address:</label>
+              <input type="text" id="address" name="address" /><br />
+              <button type="submit" class="box__button">Add Employee</button>
+            </form>
+          </div>
+        </section>
+      </div>
+      <footer class="footer mt-5">
+        <div class="container1">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-left">
+              <p class="mb-0">&copy; 2024 FICO Score. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <a href="#" class="mr-3">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="../static/css/style.css" />
+
+    <!----===== Iconscout CSS ===== -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <title>ScoreFin</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo-name">
+        <div class="logo-image">
+          <img src="images/logo.png" alt />
+        </div>
+        <span class="logo_name">ScoreFin</span>
+      </div>
+      <div class="menu-items">
+        <ul class="nav-links">
+          <li>
+            <a href="{{url_for('home')}}">
+              <i class="uil uil-estate"></i>
+              <span class="link-name">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="uil uil-apps"></i>
+              <span class="link-name">Dahsboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{url_for('credit')}}">
+              <i class="uil uil-credit-card"></i>
+              <span class="link-name">Credit Score</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="uil uil-files-landscapes"></i>
+              <span class="link-name">Content</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="uil uil-chart"></i>
+              <span class="link-name">Analytics</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="uil uil-info-circle"></i>
+              <span class="link-name">About</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="uil uil-envelope"></i>
+              <span class="link-name">Contact</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="logout-mode">
+          <li>
+            <a href="#">
+              <i class="uil uil-signout"></i>
+              <span class="link-name">Logout</span>
+            </a>
+          </li>
+          <li class="mode">
+            <a href="#">
+              <i class="uil uil-moon"></i>
+              <span class="link-name">Dark Mode</span>
+            </a>
+            <div class="mode-toggle">
+              <span class="switch"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section class="dashboard">
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+        <div class="search-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Search here..." />
+        </div>
+
+        <img src="images/profile.png" alt />
+      </div>
+      <div class="dash-content">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">Dashboard</span>
+          </div>
+          <div class="boxes">
+            <div class="box box1">
+              <i class="uil uil-thumbs-up"></i>
+              <span class="text">Total Likes</span>
+              <span class="number">50,120</span>
+            </div>
+            <div class="box box2">
+              <i class="uil uil-comments"></i>
+              <span class="text">Comments</span>
+              <span class="number">20,120</span>
+            </div>
+            <div class="box box3">
+              <i class="uil uil-share"></i>
+              <span class="text">Total Share</span>
+              <span class="number">10,120</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">Credit Score Prediction</span>
+          </div>
+          <div class="boxes">
+            <button class="btn btn-option" onclick="showForm()">
+              Fill Form
+            </button>
+            <button class="btn btn-option" onclick="showUpload()">
+              Upload CSV
+            </button>
+          </div>
+        </div>
+
+        <div id="form-section" class="hidden">
+          <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">Fill in the Form</span>
+          </div>
+          <form action="#" method="post">
+            <div class="container">
+              <div
+                class
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <h3>
+                  Predict the credit score for a home equity loan application.
+                </h3>
+              </div>
+
+              <form action="{{url_for('credit')}}" method="post" id="data-form">
+                <label for="LOAN">LOAN:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="LOAN"
+                  name="LOAN"
+                  placeholder="Enter loan amount"
+                  required
+                />
+
+                <label for="MORTDUE">MORTDUE:</label>
+                <input
+                  type="number"
+                  id="MORTDUE"
+                  name="MORTDUE"
+                  placeholder="Enter mortgage due"
+                  required
+                />
+
+                <label for="VALUE">VALUE:</label>
+                <input
+                  type="number"
+                  id="VALUE"
+                  name="VALUE"
+                  placeholder="Enter property value"
+                  required
+                />
+
+                <label for="REASON">REASON:</label>
+                <select id="REASON" name="REASON" required>
+                  <option value="">Select Reason</option>
+                  <option value="DebtCon">Debt Consolidation</option>
+                  <option value="HomeImp">Home Improvement</option>
+                </select>
+
+                <label for="JOB">JOB:</label>
+                <select id="JOB" name="JOB" required>
+                  <option value="">Select Job</option>
+                  <option value="Mgr">Manager</option>
+                  <option value="Office">Office Worker</option>
+                  <option value="Other">Other</option>
+                  <option value="ProfExe">Professional Executive</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Self">Self-employed</option>
+                </select>
+
+                <label for="YOJ">YOJ:</label>
+                <input
+                  type="number"
+                  id="YOJ"
+                  name="YOJ"
+                  placeholder="Enter years at job"
+                  required
+                />
+
+                <label for="DEROG">DEROG:</label>
+                <input
+                  type="number"
+                  id="DEROG"
+                  name="DEROG"
+                  placeholder="Enter derogatory reports"
+                  required
+                />
+
+                <label for="DELINQ">DELINQ:</label>
+                <input
+                  type="number"
+                  id="DELINQ"
+                  name="DELINQ"
+                  placeholder="Enter delinquent credit lines"
+                  required
+                />
+                <label for="CLAGE">CLAGE:</label>
+                <input
+                  type="number"
+                  id="CLAGE"
+                  name="CLAGE"
+                  placeholder="Enter credit age in months"
+                  required
+                />
+
+                <label for="NINQ">NINQ:</label>
+                <input
+                  type="number"
+                  id="NINQ"
+                  name="NINQ"
+                  placeholder="Enter inquiries"
+                  required
+                />
+
+                <label for="CLNO">CLNO:</label>
+                <input
+                  type="number"
+                  id="CLNO"
+                  name="CLNO"
+                  placeholder="Enter CLNO"
+                  required
+                />
+                <label for="DEBTINC">DEBTINC:</label>
+                <input
+                  type="number"
+                  id="DEBTINC"
+                  name="DEBTINC"
+                  placeholder="Enter debt-to-income ratio"
+                  required
+                />
+
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+          </form>
+          <button class="btn btn-secondary mt-3" onclick="hideSections()">
+            Back
+          </button>
+        </div>
+
+        <div id="upload-section" class="hidden">
+          <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">Upload CSV File</span>
+          </div>
+          <form
+            action="{{ url_for('analyse_file') }}"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <input type="file" name="file" accept=".csv" />
+            <input type="submit" value="Upload" />
+          </form>
+          <button class="btn btn-secondary mt-3" onclick="hideSections()">
+            Back
+          </button>
+        </div>
+      </div>
+    </section>
+    <script src="../static/js/script.js"></script>
+    <script>
+      function showForm() {
+        document.getElementById("form-section").classList.remove("hidden");
+        document.getElementById("upload-section").classList.add("hidden");
+      }
+
+      function showUpload() {
+        document.getElementById("upload-section").classList.remove("hidden");
+        document.getElementById("form-section").classList.add("hidden");
+      }
+
+      function hideSections() {
+        document.getElementById("form-section").classList.add("hidden");
+        document.getElementById("upload-section").classList.add("hidden");
+      }
+    </script>
+  </body>
+</html>

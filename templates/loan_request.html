@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FICO Score</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo-name">
+        <div class="logo-image">
+          <img src="../static/images/logo.png" alt="Logo" />
+        </div>
+        <span class="logo_name">
+          <span class="score">FICO</span><span class="fin">Score</span>
+        </span>
+      </div>
+      <div class="menu-items">
+        <ul class="nav-links">
+          <li>
+            <a href="{{url_for('home')}}"
+              ><i class="uil uil-estate"></i
+              ><span class="link-name">Home</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-apps"></i
+              ><span class="link-name">Dashboard</span></a
+            >
+          </li>
+          <li>
+            <a href="{{url_for('credit')}}"
+              ><i class="uil uil-credit-card"></i
+              ><span class="link-name">Credit Score</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-files-landscapes"></i
+              ><span class="link-name">Content</span></a
+            >
+          </li>
+          <li>
+            <a href="#"
+              ><i class="uil uil-chart"></i
+              ><span class="link-name">Analytics</span></a
+            >
+          </li>
+          <li>
+            <a href="{{url_for('about')}}"
+              ><i class="uil uil-info-circle"></i
+              ><span class="link-name">About</span></a
+            >
+          </li>
+          <li>
+            <a href="{{url_for('contact')}}"
+              ><i class="uil uil-envelope"></i
+              ><span class="link-name">Contact</span></a
+            >
+          </li>
+        </ul>
+        <ul class="logout-mode">
+          <li>
+            <a href="{{url_for('home')}}"
+              ><i class="uil uil-signout"></i
+              ><span class="link-name">Logout</span></a
+            >
+          </li>
+          <li class="mode">
+            <a href="#"
+              ><i class="uil uil-moon"></i
+              ><span class="link-name">Dark Mode</span></a
+            >
+            <div class="mode-toggle"><span class="switch"></span></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section class="dashboard">
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+        <div class="search-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Search here..." />
+        </div>
+        <img src="../static/images/profile.png" alt="Profile" />
+      </div>
+      <div class="dash-content">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-money-bill"></i>
+            <span class="text">Loan Request</span>
+          </div>
+        </div>
+        <section>
+          <div class="card1">
+            <div class="card-header">
+              <ul
+                class="nav nav-tabs card-header-tabs"
+                id="innerTab"
+                role="tablist"
+              >
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="entryForm-tab"
+                    data-toggle="tab"
+                    href="#entryForm"
+                    role="tab"
+                    aria-controls="entryForm"
+                    aria-selected="true"
+                    >Loan Calculate</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="fileForm-tab"
+                    data-toggle="tab"
+                    href="#fileForm"
+                    role="tab"
+                    aria-controls="fileForm"
+                    aria-selected="false"
+                    >Check Status</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+
+            <div class="card-body tab-content" id="innerTabContent">
+              <!-- Entry Form Start -->
+              <div
+                class="tab-pane fade show active"
+                id="entryForm"
+                role="tabpanel"
+                aria-labelledby="entryForm-tab"
+              >
+              <div id="loan-calculate" class="form-section" style="display: block">
+                <h2>Loan Request</h2>
+                <form action="{{ url_for('loan_request') }}" method="post">
+                  <label for="cccd">CCCD:</label>
+                  <input type="text" id="cccd" name="cccd" value="{{ cccd }}" required />
+                  <input type="hidden" name="action" value="request_loan" />
+                  <input type="submit" value="Calculate Loan" />
+                </form>
+      
+                {% if suggested_amount is not none %}
+                <div class="suggested-amount">
+                  <h3>Suggested Loan Amount: {{ suggested_amount }}</h3>
+                  {% if user_message %}
+                  <p>{{ user_message }}</p>
+                  {% endif %}
+                  <form action="{{ url_for('confirm_loan') }}" method="post">
+                    <input type="hidden" name="cccd" value="{{ cccd }}" />
+                    <input
+                      type="hidden"
+                      name="suggested_amount"
+                      value="{{ suggested_amount }}"
+                    />
+                    <input type="submit" value="Confirm Loan" />
+                  </form>
+                </div>
+                {% endif %}
+                <button onclick="showSection('')">Back</button>
+              </div>
+              </div>
+            
+            <!-- End Entry Form -->
+
+            <!-- File Form Start -->
+            <div
+              class="tab-pane fade show text-center"
+              id="fileForm"
+              role="tabpanel"
+              aria-labelledby="fileForm-tab"
+            >
+              <div
+                class="tab-pane fade show text-center"
+                id="fileForm"
+                role="tabpanel"
+                aria-labelledby="fileForm-tab"
+              >
+              <div id="check_status" class="form-section">
+                <h2>Check Approval Status</h2>
+                <form action="{{ url_for('loan_request') }}" method="post">
+                  <input type="hidden" name="action" value="check_status" />
+                  <label for="cccd_status">CCCD:</label>
+                  <input type="text" id="cccd_status" name="cccd" required />
+                  <input type="submit" value="Check Status" />
+                </form>
+                {% if loan_status %}
+                <div class="loan-status">
+                  <h3>Loan Status for CCCD: {{ check_cccd }}</h3>
+                  <p>Status: {{ loan_status.status }}</p>
+                  <p>Approval Date: {{ loan_status.approval_date }}</p>
+                  <p>Approved Amount: {{ loan_status.amount }}</p>
+                </div>
+                {% elif check_cccd %}
+                <p>No loan status found for CCCD: {{ check_cccd }}</p>
+                {% endif %}
+                <button onclick="showSection('')">Back</button>
+              </div>
+              </div>
+              <!-- End File Form -->
+            </div>
+          </div>
+          <!-- End of Predictor Section -->
+        </div>
+      </div>
+      <!-- Start of Footer -->
+      <footer class="footer mt-5">
+        <div class="container1">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-left">
+              <p class="mb-0">&copy; 2024 FICO Score. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+              <a href="#" class="mr-3">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    
+    <!-- End of Footer -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="../static/js/script.js"></script>
+  </body>
+</html>
